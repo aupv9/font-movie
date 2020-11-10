@@ -3,8 +3,9 @@ import {
     CBadge,
     CCardBody,
     CDataTable,
-    CButton,CCollapse
+    CButton
   } from '@coreui/react'
+  import axios from 'axios';
 
   const usersData = [
     {image: 'John Doe', name: '2018/01/01', genre: 'Hành động', status: 'active'},
@@ -20,9 +21,9 @@ import {
     {image: 'John Doe', name: '2018/01/01', genre: 'Hành động', status: 'active'},
 
   ]
-  const getBadge = (status)=>{
-    switch (status) {
-      case 'active': return 'success';
+  const getBadge = (statusActive)=>{
+    switch (statusActive) {
+      case true: return 'success';
       default: return 'banned'
     }
   }
@@ -31,8 +32,8 @@ import {
   const fields = [
     { key: 'image', _style: { width: '20%'} ,filter:false},
     { key: 'name', _style: { width: '20%'} },
-    { key: 'genre', _style: { width: '20%'} },
-    { key: 'status', _style: { width: '1%'} },
+    { key: 'genre_id', _style: { width: '20%'} },
+    { key: 'statusActive', _style: { width: '1%'} },
     {
       key: 'operation',
       label: 'Operation',
@@ -47,14 +48,18 @@ const MoivePage = () =>{
   const [dataFilm,setDataFilm] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/films")
-      .then(res => console.log(res))
-  }, [])
+    axios.get("http://localhost:8080/api/v1/films")
+      .then(res =>
+        {
+          console.log(res.data);
+          setDataFilm(res.data)
+        })
+  },[])
 
   return (
       <Fragment>
         <CDataTable
-        items={usersData}
+        items={dataFilm}
         fields={fields}
         columnFilter
         tableFilter
@@ -65,14 +70,17 @@ const MoivePage = () =>{
         sorter
         pagination
         scopedSlots = {{
-          'status':
-            (item)=>(
+          'statusActive':
+            (item)=>{
+              console.log(item.statusActive);
+              return (
               <td>
-                <CBadge color={getBadge(item.status)}>
-                  {item.status}
-                </CBadge>
+                <CBadge color={getBadge(item.statusActive)}>
+                  {item.statusActive? "Active":"Ban"}
+                </CBadge> 
               </td>
-            ),
+              )
+          },
             'operation':
             ()=>{
               return (
