@@ -44,7 +44,7 @@ import { useHistory } from 'react-router-dom';
     }
   ]
 
-const MoivePage = () =>{
+const GenrePage = () =>{
   
   const [dataFilm,setDataFilm] = useState([]);
   const history = useHistory();
@@ -103,4 +103,4 @@ const MoivePage = () =>{
     
   )
 }
-export default MoivePage;
+export default GenrePage;

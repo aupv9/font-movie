@@ -1,5 +1,5 @@
 import React from 'react';
-import EditMoive from './layout/movie/Edit-Moive';
+
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
@@ -39,7 +39,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
 const MoivePage = React.lazy(() => import('./layout/movie'));
-// const EditMoive = React.lazy(() => import('./layout/movie/Edit-Moive/index'));
+const GenrePage = React.lazy(() => import('./layout/genre'));
 
 
 const routes = [
@@ -51,12 +51,17 @@ const routes = [
 
   { path: '/movie', name: 'Movie', component: MoivePage, exact: true },
   { path: '/movie/list-movie', name: 'List Movie', component: MoivePage, exact: true },
-  { path: '/movie/list-movie/edit', name: 'Edit Movie', component:React.lazy(()=>import('./layout/movie/Edit-Moive')) },
+  { path: '/movie/list-movie/edit/:id', name: 'Edit Movie', component:React.lazy(()=>import('./layout/movie/Edit-Moive')) },
 
+  { path: '/genre', name: 'Genre', component:GenrePage , exact: true },
+  { path: '/genre/list-genre', name: 'List Genre', component: GenrePage, exact: true },
+  { path: '/genre/list-genre/edit/:id', name: 'Edit Genre', component:React.lazy(()=>import('./layout/movie/Edit-Moive')) },
 
   { path: '/base', name: 'Base', component: Cards, exact: true },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
   { path: '/base/cards', name: 'Cards', component: Cards },
+
+
   { path: '/base/carousels', name: 'Carousel', component: Carousels },
   { path: '/base/collapses', name: 'Collapse', component: Collapses },
   { path: '/base/forms', name: 'Forms', component: BasicForms },

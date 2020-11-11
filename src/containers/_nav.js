@@ -12,10 +12,6 @@ export default [
       text: 'NEW',
     }
   },
-  // {
-  //   _tag: 'CSidebarNavTitle',
-  //   _children: ['Theme']
-  // },
   {
     _tag: 'CSidebarNavItem',
     name: 'Movie',
@@ -24,8 +20,8 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Typography',
-    to: '/theme/typography',
+    name: 'Genre',
+    to: '/genre/list-genre',
     icon: 'cil-pencil',
   },
   // {

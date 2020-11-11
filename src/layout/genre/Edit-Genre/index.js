@@ -24,7 +24,7 @@ import {
 
 
 
-const EditMoive = () => {
+const EditGenre = () => {
   const [film, setFilm] = useState({});
   const {id} =useParams();
   useEffect(() => {
@@ -172,9 +172,6 @@ const EditMoive = () => {
                     </CSelect>
                   </CCol>
                 </CFormGroup>
-               
-                
-               
               </CForm>
             </CCardBody>
             <CCardFooter>
@@ -204,4 +201,4 @@ const EditMoive = () => {
     );
 }
 
-export default EditMoive;
+export default EditGenre;
