@@ -44,7 +44,7 @@ import { useHistory } from 'react-router-dom';
     }
   ]
 
-const GenrePage = () =>{
+const ActorPage = () =>{
   
   const [dataFilm,setDataFilm] = useState([]);
   const history = useHistory();
@@ -57,7 +57,7 @@ const GenrePage = () =>{
   },[]);
   
   const getFilmById = (id)=>{
-      history.push(`/genre/list-genre/edit/${id}`);
+      history.push(`/movie/list-movie/edit/${id}`);
   }
 
   return (
@@ -103,4 +103,4 @@ const GenrePage = () =>{
     
   )
 }
-export default GenrePage;
+export default ActorPage;
