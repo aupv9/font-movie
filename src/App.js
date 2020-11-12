@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
-
+import 'react-toastify/dist/ReactToastify.css';
+import 'sweetalert2/src/sweetalert2.scss'
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>

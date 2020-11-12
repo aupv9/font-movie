@@ -7,11 +7,8 @@ import {
   } from '@coreui/react'
   import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
-
 
   const usersData = [
-    {image: 'John Doe', name: '2018/01/01', genre: 'Hành động', status: 'active'},
     {image: 'John Doe', name: '2018/01/01', genre: 'Hành động', status: 'active'},
     {image: 'John Doe', name: '2018/01/01', genre: 'Hành động', status: 'active'},
     {image: 'John Doe', name: '2018/01/01', genre: 'Hành động', status: 'active'},
@@ -33,10 +30,13 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
  
 
   const fields = [
-    { key: 'image', _style: { width: '20%'} ,filter:false},
-    { key: 'name', _style: { width: '20%'} },
-    { key: 'genre_id', _style: { width: '20%'} },
-    { key: 'statusActive', _style: { width: '1%'} },
+    { key: 'userName', _style: { width: '15%'} ,filter:false},
+    { key: 'firstName', _style: { width: '15%'} },
+    { key: 'lastName', _style: { width: '15%'} },
+    { key: 'birthDay', _style: { width: '15%'} },
+
+    { key: 'email', _style: { width: '15%'} },
+    { key: 'phone', _style: { width: '15%'} },
     {
       key: 'operation',
       label: 'Operation',
@@ -46,56 +46,23 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
     }
   ]
 
-const MoivePage = () =>{
+const UserPage = () =>{
   
   const [dataFilm,setDataFilm] = useState([]);
   const history = useHistory();
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/films")
+    axios.get("http://localhost:8080/api/v1/users")
       .then(res =>
         {
+          console.log(res.data);
           setDataFilm(res.data)
         })
   },[]);
   
-  const getFilmById = (id)=>{
-      history.push(`/movie/list-movie/edit/${id}`);
+  const getUserById = (id)=>{
+      history.push(`/user/list-user/edit/${id}`);
   }
 
-  const deleteFilm  = (id)=>{
-    
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "Bạn muốn xóa bộ phim này không ?!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-          axios.delete(`http://localhost:8080/api/v1/film/${id}`).then(
-            res =>{
-              if(res.status === 200){
-                Swal.fire(
-                  'Deleted!',
-                  'Your film has been deleted.',
-                  'success'
-                )
-              }else{
-                
-                Swal.fire(
-                  'Deleted!',
-                  'Your film has not been deleted.',
-                  'error'
-                )
-              }
-            }
-          );
-      }
-    })
-    
-  }
   return (
       <Fragment>
         <CDataTable
@@ -124,10 +91,10 @@ const MoivePage = () =>{
             (item)=>{
               return (
                 <CCardBody>
-                  <CButton size="sm" color="info"  onClick={()=>{getFilmById(item.id)}}>
+                  <CButton size="sm" color="info"  onClick={()=>{getUserById(item.id)}}>
                    Edit
                   </CButton>
-                  <CButton size="sm" color="danger" className="ml-1" onClick={ ()=> deleteFilm(item.id)}>
+                  <CButton size="sm" color="danger" className="ml-1">
                     Delete
                   </CButton>
                 </CCardBody>
@@ -135,9 +102,8 @@ const MoivePage = () =>{
             }
         }}
     />
-
       </Fragment>
     
   )
 }
-export default MoivePage;
+export default UserPage;

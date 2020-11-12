@@ -42,6 +42,24 @@ export default [
     to: '/user/list-user',
     icon: 'cil-pencil',
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Member Package',
+    to: '/member/list-member',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Account',
+    to: '/account/list-account',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Report',
+    to: '/report/list-report',
+    icon: 'cil-pencil',
+  },
 
 
   // {

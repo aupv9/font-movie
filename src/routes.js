@@ -44,11 +44,21 @@ const MoivePage = React.lazy(() => import('./layout/movie'));
 const GenrePage = React.lazy(() => import('./layout/genre'));
 const Director = React.lazy(() => import('./layout/director'));
 const Actor = React.lazy(() => import('./layout/actor'));
+const UserPage =  React.lazy(() => import('./layout/user'));
+const MemberPage =  React.lazy(() => import('./layout/member'));
+const AccountPage =  React.lazy(() => import('./layout/account'));
+const ReportPage =  React.lazy(() => import('./layout/report'));
+
+
 
 const EditMoive =React.lazy(() => import('./layout/movie/Edit-Moive'));
 const EditGenre= React.lazy(() => import('./layout/genre/Edit-Genre'));
 const EditDirector= React.lazy(() => import('./layout/director/Edit-Director'));
-const EditActor= React.lazy(() => import('./layout/actor'));
+const EditActor= React.lazy(() => import('./layout/actor/Edit-Actor'));
+const EditAccount= React.lazy(() => import('./layout/account/Edit-Account'));
+const EditUser= React.lazy(() => import('./layout/user/Edit-User'));
+const EditMember= React.lazy(() => import('./layout/member/Edit-Member'));
+const EditReport= React.lazy(() => import('./layout/report/Edit-Report'));
 
 
 const routes = [
@@ -76,9 +86,24 @@ const routes = [
   { path: '/actor/list-actor/edit/:id', name: 'Edit actor', component:EditActor},
 
 
-  { path: '/user', name: 'User', component:Actor , exact: true },
-  { path: '/user/list-user', name: 'List user', component: Actor, exact: true },
-  { path: '/user/list-user/edit/:id', name: 'Edit user', component:EditActor},
+  { path: '/user', name: 'User', component:UserPage , exact: true },
+  { path: '/user/list-user', name: 'List user', component: UserPage, exact: true },
+  { path: '/user/list-user/edit/:id', name: 'Edit user', component:EditUser},
+
+
+  { path: '/member', name: 'Member Package', component:MemberPage , exact: true },
+  { path: '/member/list-member', name: 'Member Package', component: MemberPage, exact: true },
+  { path: '/member/list-member/edit/:id', name: 'Edit Member Package', component:EditMember},
+  
+
+  { path: '/account', name: 'Account', component:AccountPage , exact: true },
+  { path: '/account/list-account', name: 'List Account', component: AccountPage, exact: true },
+  { path: '/account/list-account/edit/:id', name: 'Edit Account', component:EditAccount},
+
+  { path: '/report', name: 'Report', component:ReportPage , exact: true },
+  { path: '/report/list-report', name: 'List Report', component: ReportPage, exact: true },
+  { path: '/report/list-report/edit/:id', name: 'Edit Report', component:EditReport},
+
 
 
   // { path: '/base', name: 'Base', component: Cards, exact: true },

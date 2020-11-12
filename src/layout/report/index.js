@@ -7,8 +7,6 @@ import {
   } from '@coreui/react'
   import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
-
 
   const usersData = [
     {image: 'John Doe', name: '2018/01/01', genre: 'Hành động', status: 'active'},
@@ -46,7 +44,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
     }
   ]
 
-const MoivePage = () =>{
+const ReportPage = () =>{
   
   const [dataFilm,setDataFilm] = useState([]);
   const history = useHistory();
@@ -59,43 +57,9 @@ const MoivePage = () =>{
   },[]);
   
   const getFilmById = (id)=>{
-      history.push(`/movie/list-movie/edit/${id}`);
+      history.push(`/genre/list-genre/edit/${id}`);
   }
 
-  const deleteFilm  = (id)=>{
-    
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "Bạn muốn xóa bộ phim này không ?!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-          axios.delete(`http://localhost:8080/api/v1/film/${id}`).then(
-            res =>{
-              if(res.status === 200){
-                Swal.fire(
-                  'Deleted!',
-                  'Your film has been deleted.',
-                  'success'
-                )
-              }else{
-                
-                Swal.fire(
-                  'Deleted!',
-                  'Your film has not been deleted.',
-                  'error'
-                )
-              }
-            }
-          );
-      }
-    })
-    
-  }
   return (
       <Fragment>
         <CDataTable
@@ -127,7 +91,7 @@ const MoivePage = () =>{
                   <CButton size="sm" color="info"  onClick={()=>{getFilmById(item.id)}}>
                    Edit
                   </CButton>
-                  <CButton size="sm" color="danger" className="ml-1" onClick={ ()=> deleteFilm(item.id)}>
+                  <CButton size="sm" color="danger" className="ml-1">
                     Delete
                   </CButton>
                 </CCardBody>
@@ -135,9 +99,8 @@ const MoivePage = () =>{
             }
         }}
     />
-
       </Fragment>
     
   )
 }
-export default MoivePage;
+export default ReportPage;

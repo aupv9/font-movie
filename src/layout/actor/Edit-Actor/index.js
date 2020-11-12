@@ -19,50 +19,27 @@ import {
   import axios from 'axios';
   import CIcon from '@coreui/icons-react';
   import { useParams } from "react-router";
-  import { toast ,ToastContainer} from 'react-toastify';
 
 
 
 
 
-const EditMoive = () => {
-  const [values,setValues] = useState({});
+const EditActor = () => {
+  const [film, setFilm] = useState({});
   const {id} =useParams();
   useEffect(() => {
 
     axios.get(`http://localhost:8080/api/v1/film/${id}`).then(res => {
-      setValues(res.data);
+      setFilm(res.data);
       console.log(res.data)
     })
   }, [])
 
-  const handleInputChange =(event) =>{
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    console.log(value);
-    setValues({...values,
-      [name]: value
-    },);
-  }
-  const updateFilm = () =>{
-      console.log(values);
-      axios.put("http://localhost:8080/api/v1/film",values).then(res => {
-        if(res.status === 202){
-          toast.success("Update success",{
-            position: toast.POSITION.TOP_RIGHT
-          });
-        }else{
-          toast.error("Update Fail",{
-            position: toast.POSITION.TOP_RIGHT
-          })
-        }
-      });
-  }
+
+
     return (
         <Fragment>
              <CRow>
-             
         <CCol xs="12" md="6">
           <CCard>
             <CCardHeader>
@@ -76,7 +53,7 @@ const EditMoive = () => {
                     <CLabel>Movie Title</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                  <CInput id="text-input" name="name" placeholder="Movie Title" value={values.name}  onChange={handleInputChange}/>
+                  <CInput id="text-input" name="text-input" placeholder="Movie Title" value={film.name}/>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -84,7 +61,8 @@ const EditMoive = () => {
                     <CLabel htmlFor="text-input">Trailer URL</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="text-input" name="trailer" placeholder="Trailer" value={values.trailer}  onChange={handleInputChange}/>
+                    <CInput id="text-input" name="text-input" placeholder="Trailer" value={film.trailer}/>
+                    {/* <CFormText>This is a help text</CFormText> */}
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -92,7 +70,7 @@ const EditMoive = () => {
                     <CLabel htmlFor="email-input">Film URL</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput  id="email-input" name="url" placeholder="URL Film" autoComplete="false" value={values.url}  onChange={handleInputChange}/>
+                    <CInput  id="email-input" name="email-input" placeholder="URL Film" autoComplete="false" value={film.url}/>
                     {/* <CFormText className="help-block">Please enter your email</CFormText> */}
                   </CCol>
                 </CFormGroup>
@@ -101,7 +79,7 @@ const EditMoive = () => {
                     <CLabel htmlFor="password-input">Poster</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                  <CInputFile id="file-input" name="image"  onChange={handleInputChange}/>
+                  <CInputFile id="file-input" name="file-input"/>
                     <CFormText className="help-block">Please select image</CFormText>
                   </CCol>
                 </CFormGroup>
@@ -110,7 +88,7 @@ const EditMoive = () => {
                     <CLabel htmlFor="date-input">Date Release</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput type="date" id="date-input" name="release" placeholder="date" value={values.release}  onChange={handleInputChange}/>
+                    <CInput type="date" id="date-input" name="date-input" placeholder="date" value={film.release}/>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -118,7 +96,7 @@ const EditMoive = () => {
                     <CLabel htmlFor="disabled-input">Duration</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput type="number" id="email-input" name="time" placeholder="" autoComplete="false"   onChange={handleInputChange} value={values.time}/>
+                    <CInput  id="email-input" name="" placeholder="" autoComplete="false" value={film.time}/>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -127,12 +105,11 @@ const EditMoive = () => {
                   </CCol>
                   <CCol xs="12" md="9">
                     <CTextarea 
-                      name="content" 
+                      name="textarea-input" 
                       id="textarea-input" 
                       rows="9"
                       placeholder="Content..." 
-                      value={values.content}
-                      onChange={handleInputChange}
+                      value={film.content}
                     />
                   </CCol>
                 </CFormGroup>
@@ -142,12 +119,11 @@ const EditMoive = () => {
                   </CCol>
                   <CCol xs="12" md="9">
                     <CTextarea 
-                      name="director" 
+                      name="textarea-input" 
                       id="textarea-input" 
                       rows="4"
                       placeholder="Director..." 
-                      value={values.director}
-                      onChange={handleInputChange}
+                      value={film.director}
                     />
                   </CCol>
                 </CFormGroup>
@@ -157,12 +133,11 @@ const EditMoive = () => {
                   </CCol>
                   <CCol xs="12" md="9">
                     <CTextarea 
-                      name="actor" 
+                      name="textarea-input" 
                       id="textarea-input" 
                       rows="4"
                       placeholder="Actor..." 
-                      value={values.actor}
-                      onChange={handleInputChange}
+                      value={film.actor}
                     />
                   </CCol>
                 </CFormGroup>
@@ -172,12 +147,13 @@ const EditMoive = () => {
                     <CLabel htmlFor="selectSm">Genre</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CSelect custom  name="genre" id="Select" onChange={handleInputChange}>
-                      <option value="Hành động">Hành động</option>
-                      <option value="Tình cảm">Tình cảm</option>
-                      <option value="Phiêu lưu">Phiêu lưu</option>
-                      <option value="Phiêu lưu">Phiêu lưu</option>
-                      
+                    <CSelect custom  name="select" id="Select">
+                      <option value="0">Please select</option>
+                      <option value="1">Option #1</option>
+                      <option value="2">Option #2</option>
+                      <option value="3">Option #3</option>
+                      <option value="4">Option #4</option>
+                      <option value="5">Option #5</option>
                     </CSelect>
                   </CCol>
                 </CFormGroup>
@@ -186,20 +162,20 @@ const EditMoive = () => {
                     <CLabel htmlFor="selectSm">Rating</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CSelect custom size="sm" name="rating" id="Select" onChange={handleInputChange}>
-                      <option value="0">0</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
+                    <CSelect custom size="sm" name="selectSm" id="Select">
+                      <option value="0">Please select</option>
+                      <option value="1">Option #1</option>
+                      <option value="2">Option #2</option>
+                      <option value="3">Option #3</option>
+                      <option value="4">Option #4</option>
+                      <option value="5">Option #5</option>
                     </CSelect>
                   </CCol>
                 </CFormGroup>
               </CForm>
             </CCardBody>
             <CCardFooter>
-              <CButton type="submit" size="sm" color="primary" onClick={updateFilm}><CIcon name="cil-scrubber" /> Edit</CButton>
+              <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> Edit</CButton>
               <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Back</CButton>
             </CCardFooter>
           </CCard>
@@ -218,11 +194,11 @@ const EditMoive = () => {
             <CCardFooter>
             </CCardFooter>
           </CCard>
+         
         </CCol>
       </CRow>
-      <ToastContainer></ToastContainer>
         </Fragment>
     );
 }
 
-export default EditMoive;
+export default EditActor;
