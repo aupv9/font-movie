@@ -3,7 +3,7 @@ import {
     CBadge,
     CCardBody,
     CDataTable,
-    CButton
+    CButton,CMediaBody,CMedia
   } from '@coreui/react'
   import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -33,8 +33,6 @@ import { useHistory } from 'react-router-dom';
   const fields = [
     { key: 'image', _style: { width: '20%'} ,filter:false},
     { key: 'name', _style: { width: '20%'} },
-    { key: 'genre_id', _style: { width: '20%'} },
-    { key: 'statusActive', _style: { width: '1%'} },
     {
       key: 'operation',
       label: 'Operation',
@@ -49,7 +47,7 @@ const DirectorPage = () =>{
   const [dataFilm,setDataFilm] = useState([]);
   const history = useHistory();
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/films")
+    axios.get("http://localhost:8080/api/v1/directors")
       .then(res =>
         {
           setDataFilm(res.data)
@@ -62,6 +60,9 @@ const DirectorPage = () =>{
 
   return (
       <Fragment>
+         <CButton size="md" color="primary" className="ml-1 mb-3" onClick={()=>{history.push("/director/list-director/create")}}>
+                    Create
+                  </CButton>
         <CDataTable
         items={dataFilm}
         fields={fields}
@@ -74,6 +75,22 @@ const DirectorPage = () =>{
         sorter
         pagination
         scopedSlots = {{
+          'image':
+            (item)=>{
+              return (
+              <td>
+               <CMedia>
+                <img src={item.image} height="50"/>
+                <CMediaBody>
+                  <h5 className="mt-0">Poster Film</h5>
+                  <p>
+                    
+                  </p>
+                </CMediaBody>
+              </CMedia>
+              </td>
+              )
+          },
           'statusActive':
             (item)=>{
               return (

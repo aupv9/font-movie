@@ -25,7 +25,7 @@ import {
 
 
 
-const EditMoive = () => {
+const CreaatMoive = () => {
   const [values,setValues] = useState({});
   const {id} =useParams();
   useEffect(() => {
@@ -47,13 +47,13 @@ const EditMoive = () => {
   }
   const updateFilm = () =>{
       console.log(values);
-      axios.put("http://localhost:8080/api/v1/film",values).then(res => {
-        if(res.status === 202){
-          toast.success("Update success",{
+      axios.post("http://localhost:8080/api/v1/film",values).then(res => {
+        if(res.status === 201){
+          toast.success("Create success",{
             position: toast.POSITION.TOP_RIGHT
           });
         }else{
-          toast.error("Update Fail",{
+          toast.error("Create Fail",{
             position: toast.POSITION.TOP_RIGHT
           })
         }
@@ -66,7 +66,7 @@ const EditMoive = () => {
             <CCol xs="12" md="6">
               <CCard>
                 <CCardHeader>
-                  Edit Movie
+                  Create Movie
                   <small> </small>
                 </CCardHeader>
                 <CCardBody>
@@ -199,25 +199,14 @@ const EditMoive = () => {
                   </CForm>
                 </CCardBody>
                 <CCardFooter>
-                  <CButton type="submit" size="sm" color="primary" onClick={updateFilm}><CIcon name="cil-scrubber" /> Edit</CButton>
+                  <CButton type="submit" size="sm" color="primary" onClick={updateFilm}><CIcon name="cil-scrubber" /> Create</CButton>
                   <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Back</CButton>
                 </CCardFooter>
               </CCard>
               
             </CCol>
             <CCol xs="12" md="6">
-          <CCard>
-            <CCardHeader>
-              Video trailer
-            </CCardHeader>
-            <CCardBody>
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-            </div>
-            </CCardBody>
-            <CCardFooter>
-            </CCardFooter>
-          </CCard>
+          
         </CCol>
       </CRow>
       <ToastContainer></ToastContainer>
@@ -225,4 +214,4 @@ const EditMoive = () => {
     );
 }
 
-export default EditMoive;
+export default CreaatMoive;

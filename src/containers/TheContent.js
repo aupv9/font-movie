@@ -8,6 +8,7 @@ import { CContainer, CFade } from '@coreui/react'
 
 // routes config
 import routes from '../routes'
+import PrivateRoute from 'src/reusable/PrivateRoute'
   
 const loading = (
   <div className="pt-3 text-center">
@@ -23,16 +24,13 @@ const TheContent = () => {
           <Switch>
             {routes.map((route, idx) => {
               return route.component && (
-                <Route
+                <PrivateRoute
                   key={idx}
                   path={route.path}
                   exact={route.exact}
                   name={route.name}
-                  render={props => (
-                    <CFade>
-                      <route.component {...props} />
-                    </CFade>
-                  )} />
+                  component={route.component}
+                   />
               )
             })}
             <Redirect from="/" to="/dashboard" />

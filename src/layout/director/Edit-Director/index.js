@@ -43,7 +43,7 @@ const EditDirector = () => {
         <CCol xs="12" md="6">
           <CCard>
             <CCardHeader>
-              Edit Movie
+              Edit Director
               <small> </small>
             </CCardHeader>
             <CCardBody>

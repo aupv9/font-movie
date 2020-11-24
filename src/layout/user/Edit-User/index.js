@@ -52,6 +52,7 @@ const EditMoive = () => {
       console.log(values);
 
       axios.put("http://localhost:8080/api/v1/user",{...values,"roles":[values["roles"]]}).then(res => {
+        
         if(res.status === 202){
           toast.success("Update success",{
             position: toast.POSITION.TOP_RIGHT
@@ -139,6 +140,17 @@ const EditMoive = () => {
                           <CSelect custom size="sm" name="roles" id="Select" onChange={handleInputChange} value={values.roles}>
                             <option value="ROLE_ADMIN">Admin</option>
                             <option value="ROLE_USER">User</option>
+                          </CSelect>
+                        </CCol>
+                      </CFormGroup>
+                      <CFormGroup row>
+                        <CCol md="3">
+                          <CLabel htmlFor="selectSm">Active</CLabel>
+                        </CCol>
+                        <CCol xs="12" md="9">
+                          <CSelect custom  name="isActive" id="Select" onChange={handleInputChange} value={values.isActive}>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
                           </CSelect>
                         </CCol>
                       </CFormGroup>

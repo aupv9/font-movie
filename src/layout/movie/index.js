@@ -3,7 +3,8 @@ import {
     CBadge,
     CCardBody,
     CDataTable,
-    CButton
+    CButton,
+    CMedia,CMediaBody
   } from '@coreui/react'
   import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -35,7 +36,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   const fields = [
     { key: 'image', _style: { width: '20%'} ,filter:false},
     { key: 'name', _style: { width: '20%'} },
-    { key: 'genre_id', _style: { width: '20%'} },
+    { key: 'genre_id', label:"Genre" ,_style: { width: '20%'} },
     { key: 'statusActive', _style: { width: '1%'} },
     {
       key: 'operation',
@@ -98,18 +99,38 @@ const MoivePage = () =>{
   }
   return (
       <Fragment>
+         <CButton size="md" color="primary" className="ml-1 mb-3" onClick={()=>{history.push('/movie/list-movie/create')}}>
+                    Create Film
+        </CButton>
         <CDataTable
-        items={dataFilm}
-        fields={fields}
-        columnFilter
-        tableFilter
-        footer
-        itemsPerPageSelect
-        itemsPerPage={5}
-        hover
-        sorter
-        pagination
-        scopedSlots = {{
+          items={dataFilm}
+          fields={fields}
+          columnFilter
+          tableFilter
+          footer
+          itemsPerPageSelect
+          itemsPerPage={5}
+          hover
+          sorter
+          pagination
+          scopedSlots = {{
+          
+          'image':
+            (item)=>{
+              return (
+              <td>
+               <CMedia>
+                <img src={item.image} height="50"/>
+                <CMediaBody>
+                  <h5 className="mt-0">Poster Film</h5>
+                  <p>
+                    
+                  </p>
+                </CMediaBody>
+              </CMedia>
+              </td>
+              )
+          },
           'statusActive':
             (item)=>{
               return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './views/pages/login/Login';
 
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -61,6 +62,12 @@ const EditMember= React.lazy(() => import('./layout/member/Edit-Member'));
 const EditReport= React.lazy(() => import('./layout/report/Edit-Report'));
 
 
+const CreateMovie= React.lazy(() => import('./layout/movie/Create-Movie'));
+const CreateGenre= React.lazy(() => import('./layout/genre/Create-Genre'));
+const CreateDirector= React.lazy(() => import('./layout/director/Create-Director'));
+
+
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
@@ -71,14 +78,18 @@ const routes = [
   { path: '/movie', name: 'Movie', component: MoivePage, exact: true },
   { path: '/movie/list-movie', name: 'List Movie', component: MoivePage, exact: true },
   { path: '/movie/list-movie/edit/:id', name: 'Edit Movie', component:EditMoive },
+  { path: '/movie/list-movie/create', name: 'Create Movie', component:CreateMovie },
 
   { path: '/genre', name: 'Genre', component:GenrePage , exact: true },
   { path: '/genre/list-genre', name: 'List Genre', component: GenrePage, exact: true },
-  { path: '/genre/list-genre/edit/:id', name: 'Edit Genre', component:EditGenre },
+  { path: '/genre/list-genre/edit/:id', name: ' EditGenre', component:EditGenre },
+  { path: '/genre/list-genre/create', name: 'Create Genre', component:CreateGenre },
+
 
   { path: '/director', name: 'Director', component:Director , exact: true },
   { path: '/director/list-director', name: 'List Director', component: Director, exact: true },
   { path: '/director/list-director/edit/:id', name: 'Edit Director', component:EditDirector},
+  { path: '/director/list-director/create', name: 'Create Director', component:CreateDirector},
 
 
   { path: '/actor', name: 'Actor', component:Actor , exact: true },
@@ -104,7 +115,7 @@ const routes = [
   { path: '/report/list-report', name: 'List Report', component: ReportPage, exact: true },
   { path: '/report/list-report/edit/:id', name: 'Edit Report', component:EditReport},
 
-
+  { path: '/login', name: 'Login', component:Login , exact: true }
 
   // { path: '/base', name: 'Base', component: Cards, exact: true },
   // { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },

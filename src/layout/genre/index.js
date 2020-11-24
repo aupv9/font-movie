@@ -92,6 +92,9 @@ const GenrePage = () =>{
   }
   return (
       <Fragment>
+         <CButton size="md" color="primary" className="ml-1 mb-3" onClick={()=>{history.push("/genre/list-genre/create")}}>
+                    Create
+                  </CButton>
         <CDataTable
         items={dataGenre}
         fields={fields}
